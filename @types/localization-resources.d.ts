@@ -1,0 +1,17 @@
+interface Resources {
+  "translation": {
+    "buttons": {
+      "login": "Log In",
+      "logout": "Log Out"
+    },
+    "labels": {
+      "home": "Home",
+      "login": "Login",
+      "posts": "Posts",
+      "username": "Username",
+      "hello": "Hello, {{username}}!"
+    }
+  }
+}
+
+export default Resources;

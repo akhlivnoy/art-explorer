@@ -1,0 +1,31 @@
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "files.readonlyInclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "files.watcherExclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "search.exclude": {
+    "**/routeTree.gen.ts": true
+  },
+  "filewatcher.autoClearConsole": true,
+  "filewatcher.commands": [
+    {
+      "match": "translation.json",
+      "isAsync": true,
+      "event": "onFileChange",
+      "vscodeTask": ["workbench.action.tasks.runTask", "generate-localization-types"]
+    }
+  ]
+}
