@@ -7,17 +7,21 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
+  "files.eol": "\n",
   "files.associations": {
     "*.css": "tailwindcss"
   },
   "files.readonlyInclude": {
-    "**/routeTree.gen.ts": true
+    "**/routeTree.gen.ts": true,
+    "**/localization-resources.d.ts": true
   },
   "files.watcherExclude": {
-    "**/routeTree.gen.ts": true
+    "**/routeTree.gen.ts": true,
+    "**/localization-resources.d.ts": true
   },
   "search.exclude": {
-    "**/routeTree.gen.ts": true
+    "**/routeTree.gen.ts": true,
+    "**/localization-resources.d.ts": true
   },
   "filewatcher.autoClearConsole": true,
   "filewatcher.commands": [
