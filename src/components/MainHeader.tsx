@@ -1,5 +1,4 @@
-import { useNavigate, useRouter } from '@tanstack/react-router';
-
+import Logo from '@/assets/logo.svg?react';
 import i18n, { LocalizationKey } from '@/localization';
 import { FileRouteTypes } from '@/routeTree.gen';
 import { useAuthStore } from '@/store/auth.store';
@@ -18,42 +17,41 @@ const MAIN_HEADER_LINKS: ReadonlyArray<MainHeaderLink> = [
     labelKey: 'labels.home',
   },
   {
-    to: '/login',
-    labelKey: 'labels.login',
-  },
-  {
+    // TODO: change to /arts
     to: '/posts',
-    labelKey: 'labels.posts',
+    labelKey: 'labels.explore_arts',
   },
 ];
 
 export const MainHeader: React.ComponentType = () => {
-  const router = useRouter();
-  const navigate = useNavigate();
   const auth = useAuthStore();
 
-  const handleLogout = () => {
-    if (window.confirm('Are you sure you want to logout?')) {
-      auth.logout();
-      router.invalidate().finally(() => {
-        navigate({ to: '/' });
-      });
-    }
+  const showSignUpModal = () => {
+    // TODO: open modal with sign up form
   };
 
   return (
-    <header className="flex justify-center gap-4 border-b-2 p-4">
-      {MAIN_HEADER_LINKS.map(({ to, labelKey }) => (
-        <MainHeaderLink key={`${to}-${labelKey.toString()}`} to={to}>
-          {i18n.t(labelKey)}
-        </MainHeaderLink>
-      ))}
+    <header className="grid grid-cols-3 items-center gap-2 py-6">
+      <div className="justify-self-start">
+        <Logo className="fill-foreground" />
+      </div>
 
-      {auth.user && (
-        <Button className="absolute right-10" onClick={handleLogout}>
-          {i18n.t('buttons.logout')}
-        </Button>
-      )}
+      <div className="flex gap-8 justify-self-center">
+        {MAIN_HEADER_LINKS.map(({ to, labelKey }) => (
+          <MainHeaderLink key={`${to}-${labelKey.toString()}`} to={to}>
+            {i18n.t(labelKey)}
+          </MainHeaderLink>
+        ))}
+      </div>
+
+      <div className="justify-self-end">
+        {auth.user ? (
+          <Button onClick={showSignUpModal}>{i18n.t('buttons.join')}</Button>
+        ) : (
+          // TODO: show profile picture
+          <div />
+        )}
+      </div>
     </header>
   );
 };
