@@ -46,10 +46,10 @@ export const MainHeader: React.ComponentType = () => {
 
       <div className="justify-self-end">
         {auth.user ? (
-          <Button onClick={showSignUpModal}>{i18n.t('buttons.join')}</Button>
-        ) : (
           // TODO: show profile picture
           <div />
+        ) : (
+          <Button onClick={showSignUpModal}>{i18n.t('buttons.join')}</Button>
         )}
       </div>
     </header>
