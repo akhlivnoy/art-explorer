@@ -15,12 +15,10 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 });
 function RootComponent() {
   return (
-    <div className="p-5">
+    <div className="container mx-auto px-4">
       <MainHeader />
 
-      <div className="py-5">
-        <Outlet />
-      </div>
+      <Outlet />
 
       {import.meta.env.DEV && <TanStackRouterDevtools />}
     </div>

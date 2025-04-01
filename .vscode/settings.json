@@ -31,5 +31,10 @@
       "event": "onFileChange",
       "vscodeTask": ["workbench.action.tasks.runTask", "generate-localization-types"]
     }
-  ]
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "tailwindCSS.classAttributes": ["class", "className", "ngClass", "class:list", "activeProps"],
+  "tailwindCSS.classFunctions": ["cva"]
 }
