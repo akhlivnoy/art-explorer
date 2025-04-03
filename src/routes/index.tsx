@@ -1,7 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { t } from 'i18next';
 
-import homeBanner from '@/assets/home-banner.webp';
+import homeBannerJpeg from '@/assets/home-banner.jpg';
+import homeBannerWebp from '@/assets/home-banner.webp';
 import { Button } from '@/components/ui/button';
 import { H1, P } from '@/components/ui/typography';
 
@@ -36,7 +37,11 @@ function RouteComponent() {
         </div>
 
         <div className="flex max-h-full flex-1/2">
-          <img alt="Banner" className="aspect-square object-cover" loading="eager" src={homeBanner} />
+          <picture>
+            <source srcSet={homeBannerWebp} type="image/webp" />
+            <source srcSet={homeBannerJpeg} type="image/jpeg" />
+            <img alt="Banner" className="aspect-square object-cover" />
+          </picture>
         </div>
       </section>
     </div>
