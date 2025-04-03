@@ -1,4 +1,4 @@
-import reactIcon from '../assets/react.svg';
+import SpinnerIcon from '@/assets/spinner.svg?react';
 
 type SpinnerProps = {
   show?: boolean;
@@ -12,7 +12,7 @@ export const Spinner: React.FunctionComponent<SpinnerProps> = ({ show, wait }) =
         (show ?? true) ? `opacity-100 duration-500 ${wait ?? 'delay-300'}` : 'opacity-0 delay-0 duration-500'
       }`}
     >
-      <img alt="spinner" src={reactIcon} />
+      <SpinnerIcon width={36} />
     </div>
   );
 };

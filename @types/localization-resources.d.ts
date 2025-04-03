@@ -2,7 +2,8 @@ interface Resources {
   "translation": {
     "buttons": {
       "join": "Join",
-      "login": "Log In",
+      "login": "Login",
+      "sign_up": "Sign Up",
       "logout": "Log Out"
     },
     "labels": {
@@ -11,6 +12,14 @@ interface Resources {
       "login": "Login",
       "username": "Username",
       "hello": "Hello, {{username}}!"
+    },
+    "pages": {
+      "home": {
+        "hero_section": {
+          "title": "Discover & Explore Museum Masterpieces",
+          "description": "Unveil the beauty of art from the world’s greatest museums. Browse, explore, and immerse yourself in timeless masterpieces—all in one place."
+        }
+      }
     }
   }
 }

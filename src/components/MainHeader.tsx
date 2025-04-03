@@ -1,5 +1,8 @@
-import Logo from '@/assets/logo.svg?react';
-import i18n, { LocalizationKey } from '@/localization';
+import { Link } from '@tanstack/react-router';
+import { t } from 'i18next';
+
+import LogoIcon from '@/assets/logo.svg?react';
+import { LocalizationKey } from '@/localization';
 import { FileRouteTypes } from '@/routeTree.gen';
 import { useAuthStore } from '@/store/auth.store';
 
@@ -33,23 +36,25 @@ export const MainHeader: React.ComponentType = () => {
   return (
     <header className="grid grid-cols-3 items-center gap-2 py-6">
       <div className="justify-self-start">
-        <Logo className="fill-foreground" />
+        <Link to="/">
+          <LogoIcon className="fill-foreground" />
+        </Link>
       </div>
 
-      <div className="flex gap-8 justify-self-center">
+      <nav className="flex gap-8 justify-self-center">
         {MAIN_HEADER_LINKS.map(({ to, labelKey }) => (
           <MainHeaderLink key={`${to}-${labelKey.toString()}`} to={to}>
-            {i18n.t(labelKey)}
+            {t(labelKey)}
           </MainHeaderLink>
         ))}
-      </div>
+      </nav>
 
       <div className="justify-self-end">
         {auth.user ? (
           // TODO: show profile picture
           <div />
         ) : (
-          <Button onClick={showSignUpModal}>{i18n.t('buttons.join')}</Button>
+          <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
         )}
       </div>
     </header>
