@@ -9,6 +9,9 @@ interface Resources {
     "labels": {
       "home": "Home",
       "explore_arts": "Explore Arts",
+      "art_gallery": "Art Gallery",
+      "contact_us": "Contact Us",
+      "all_rights_reserved": "© 2025 ArtExplorer. All rights reserved.",
       "login": "Login",
       "username": "Username",
       "hello": "Hello, {{username}}!"
