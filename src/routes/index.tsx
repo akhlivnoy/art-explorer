@@ -21,7 +21,7 @@ const showLoginModal = () => {
 function RouteComponent() {
   return (
     <div>
-      <section className="flex h-[calc(100vh-98px)] items-center gap-20">
+      <section className="flex h-[calc(100vh-98px)] items-center gap-20" id="hero">
         <div className="flex-1/2">
           <H1>{t('pages.home.hero_section.title')}</H1>
           <P>{t('pages.home.hero_section.description')}</P>

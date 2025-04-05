@@ -6,7 +6,7 @@ import { LocalizationKey } from '@/localization';
 import { FileRouteTypes } from '@/routeTree.gen';
 import { useAuthStore } from '@/store/auth.store';
 
-import { MainHeaderLink } from './MainHeaderLink';
+import { NavLink } from './NavLink';
 import { Button } from './ui/button';
 
 type MainHeaderLink = {
@@ -43,9 +43,9 @@ export const MainHeader: React.ComponentType = () => {
 
       <nav className="flex gap-8 justify-self-center">
         {MAIN_HEADER_LINKS.map(({ to, labelKey }) => (
-          <MainHeaderLink key={`${to}-${labelKey.toString()}`} to={to}>
+          <NavLink key={`${to}-${labelKey.toString()}`} to={to}>
             {t(labelKey)}
-          </MainHeaderLink>
+          </NavLink>
         ))}
       </nav>
 
