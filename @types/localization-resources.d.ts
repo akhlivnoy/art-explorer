@@ -4,6 +4,7 @@ interface Resources {
       "join": "Join",
       "login": "Login",
       "sign_up": "Sign Up",
+      "register": "Register",
       "logout": "Log Out"
     },
     "labels": {
@@ -13,8 +14,11 @@ interface Resources {
       "contact_us": "Contact Us",
       "all_rights_reserved": "© 2025 ArtExplorer. All rights reserved.",
       "login": "Login",
+      "registration": "Registration",
       "username": "Username",
-      "hello": "Hello, {{username}}!"
+      "password": "Password",
+      "already_have_account": "Already have an account?",
+      "dont_have_account": "Don't have an account?"
     },
     "pages": {
       "home": {

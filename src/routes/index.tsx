@@ -10,15 +10,17 @@ export const Route = createFileRoute('/')({
   component: RouteComponent,
 });
 
-const showSignUpModal = () => {
-  // TODO: open modal with sign up form
-};
-
-const showLoginModal = () => {
-  // TODO: open modal with sign in form
-};
-
 function RouteComponent() {
+  const { auth } = Route.useRouteContext();
+
+  const showSignUpModal = () => {
+    auth.setAuthAction('sign-up');
+  };
+
+  const showLoginModal = () => {
+    auth.setAuthAction('sign-in');
+  };
+
   return (
     <div>
       <section className="flex h-[calc(100vh-98px)] items-center gap-20" id="hero">

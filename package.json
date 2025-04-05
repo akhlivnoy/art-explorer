@@ -13,6 +13,8 @@
     "localization-types": "i18next-resources-for-ts interface -i ./src/localization/locales/en -o ./@types/localization-resources.d.ts"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.6",
+    "@radix-ui/react-label": "^2.1.2",
     "@radix-ui/react-slot": "^1.1.2",
     "@tailwindcss/vite": "^4.0.13",
     "@tanstack/react-query": "^5.67.3",

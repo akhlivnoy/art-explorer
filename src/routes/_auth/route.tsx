@@ -3,10 +3,11 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { H3, P } from '@/components/ui/typography';
 
 export const Route = createFileRoute('/_auth')({
-  beforeLoad: ({ context: { auth }, location }) => {
-    if (!auth.user) {
+  beforeLoad: ({ context: { auth }, location, preload }) => {
+    if (!auth.user && !preload) {
+      auth.setAuthAction('sign-in');
       throw redirect({
-        to: '/login',
+        to: '..',
         search: {
           redirect: location.href,
         },

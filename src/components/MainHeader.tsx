@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router';
 import { t } from 'i18next';
+import { UserCircle } from 'lucide-react';
 
+import { useLogout } from '@/api/queries/auth.query';
 import LogoIcon from '@/assets/logo.svg?react';
 import { LocalizationKey } from '@/localization';
 import { FileRouteTypes } from '@/routeTree.gen';
@@ -27,10 +29,11 @@ const MAIN_HEADER_LINKS: ReadonlyArray<MainHeaderLink> = [
 ];
 
 export const MainHeader: React.ComponentType = () => {
-  const auth = useAuthStore();
+  const { user, setAuthAction } = useAuthStore();
+  const logoutMutation = useLogout();
 
   const showSignUpModal = () => {
-    // TODO: open modal with sign up form
+    setAuthAction('sign-up');
   };
 
   return (
@@ -50,9 +53,11 @@ export const MainHeader: React.ComponentType = () => {
       </nav>
 
       <div className="justify-self-end">
-        {auth.user ? (
-          // TODO: show profile picture
-          <div />
+        {user ? (
+          // TODO: navigate to favorites page
+          <Link to="/" onClick={() => logoutMutation.mutate()}>
+            <UserCircle size={36} />
+          </Link>
         ) : (
           <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
         )}
