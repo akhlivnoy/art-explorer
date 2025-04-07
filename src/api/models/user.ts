@@ -1,6 +1,6 @@
 import { Nullable } from '@/types/nullable';
 
-export type UserModel = {
-  id: string;
+export type User = {
+  id: number;
   username: Nullable<string>;
 };

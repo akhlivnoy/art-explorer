@@ -1,19 +1,22 @@
-import { UserModel } from '@/api/models/user';
+import { User } from '@/api/models/user';
 import { Nullable } from '@/types/nullable';
 import { createStoreWithMiddlewares } from '@/utils/createStore';
 
 type AuthState = {
-  user: Nullable<UserModel>;
+  user: Nullable<User>;
+  authAction: Nullable<'sign-in' | 'sign-up'>;
 };
 
 const INITIAL_STATE: AuthState = {
   user: null,
+  authAction: null,
 };
 
 type AuthActions = {
-  setUser: (user: UserModel) => void;
+  setUser: (user: User) => void;
   updateUsername: (username: string) => void;
   logout: () => void;
+  setAuthAction: (action: AuthState['authAction']) => void;
 };
 
 export type AuthStore = AuthState & AuthActions;
@@ -32,6 +35,16 @@ export const useAuthStore = createStoreWithMiddlewares<AuthState, AuthActions>({
     },
     logout() {
       return INITIAL_STATE;
+    },
+    setAuthAction(state, action) {
+      state.authAction = action;
+    },
+  },
+  persistOptions: {
+    partialize(state) {
+      return {
+        user: state.user,
+      };
     },
   },
 });
