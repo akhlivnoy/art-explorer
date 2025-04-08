@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router';
 
-export const Route = createFileRoute('/_auth/posts/')({
+export const Route = createFileRoute('/explore')({
   component: RouteComponent,
 });
 
 function RouteComponent() {
-  return <div>Select a post.</div>;
+  return <div className="grow">Hello /_auth/explore!</div>;
 }

@@ -1,10 +1,12 @@
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { t } from 'i18next';
 
 import homeBannerJpeg from '@/assets/home-banner.jpg';
 import homeBannerWebp from '@/assets/home-banner.webp';
 import { Button } from '@/components/ui/button';
-import { H1, P } from '@/components/ui/typography';
+import { H1, H2, P } from '@/components/ui/typography';
+
+import { ArtworkCarousel } from './-components/ArtworkCarousel';
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -45,6 +47,20 @@ function RouteComponent() {
             <img alt="Banner" className="aspect-square object-cover" />
           </picture>
         </div>
+      </section>
+
+      <section id="arts-carousel">
+        <div className="mb-10 flex items-end justify-between">
+          <div>
+            <H2>{t('pages.home.explore_arts.title')}</H2>
+            <P>{t('pages.home.explore_arts.description')}</P>
+          </div>
+
+          <Button asChild variant="outline">
+            <Link to="/explore">{t('buttons.view_all')}</Link>
+          </Button>
+        </div>
+        <ArtworkCarousel />
       </section>
     </div>
   );
