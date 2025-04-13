@@ -10,6 +10,16 @@ const resolveWithDelay = <T>(data: T, delay: number) => {
 export const mockApiClient: ApisauceInstance = {
   get: (url => {
     switch (url) {
+      case 'users/1/favorites':
+        return resolveWithDelay(
+          {
+            ok: true,
+            data: { favorites: [1, 3] },
+            problem: null,
+            originalError: null,
+          },
+          300,
+        );
       default:
         return resolveWithDelay(
           {
@@ -62,4 +72,29 @@ export const mockApiClient: ApisauceInstance = {
         );
     }
   }) as ApisauceInstance['post'],
+  put: ((url, params) => {
+    switch (url) {
+      case 'users/1/favorites':
+        console.log('[MOCK PUT] Favorites:', params);
+        return resolveWithDelay(
+          {
+            ok: true,
+            data: undefined,
+            problem: null,
+            originalError: null,
+          },
+          300,
+        );
+      default:
+        return resolveWithDelay(
+          {
+            ok: false,
+            problem: 'CLIENT_ERROR',
+            originalError: new AxiosError(),
+            data: { message: 'Not implemented' },
+          },
+          500,
+        );
+    }
+  }) as ApisauceInstance['put'],
 } as ApisauceInstance;
