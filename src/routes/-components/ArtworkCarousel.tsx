@@ -14,7 +14,7 @@ export const ArtworkCarousel: React.FunctionComponent = () => {
           <CarouselItem className="lg:basis-1/3" key={index}>
             <ArtworkCard
               artist="Vincent van Gogh"
-              id={1}
+              id={index}
               image="https://images.metmuseum.org/CRDImages/ep/web-large/DT1567.jpg"
               title="Wheat Field with Cypresses"
             />
