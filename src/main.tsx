@@ -8,6 +8,7 @@ import { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
 
 import { Spinner } from './components/Spinner';
+import { Toaster } from './components/ui/sonner';
 import { DEFAULT_STALE_TIME } from './constants/api';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
@@ -62,6 +63,7 @@ if (!rootElement.innerHTML) {
     <StrictMode>
       <QueryClientProvider client={queryClient}>
         <App />
+        <Toaster richColors position="bottom-right" />
         <ReactQueryDevtools />
       </QueryClientProvider>
     </StrictMode>,
