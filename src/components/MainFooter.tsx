@@ -15,7 +15,7 @@ type MainFooterLink = {
 
 const MAIN_FOOTER_LINKS: ReadonlyArray<MainFooterLink> = [
   {
-    to: '/',
+    to: '/explore',
     labelKey: 'labels.art_gallery',
   },
   {

@@ -22,8 +22,7 @@ const MAIN_HEADER_LINKS: ReadonlyArray<MainHeaderLink> = [
     labelKey: 'labels.home',
   },
   {
-    // TODO: change to /arts
-    to: '/posts',
+    to: '/explore',
     labelKey: 'labels.explore_arts',
   },
 ];

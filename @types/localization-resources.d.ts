@@ -5,7 +5,9 @@ interface Resources {
       "login": "Login",
       "sign_up": "Sign Up",
       "register": "Register",
-      "logout": "Log Out"
+      "logout": "Log Out",
+      "read_more": "Read more",
+      "view_all": "View all"
     },
     "labels": {
       "home": "Home",
@@ -24,6 +26,10 @@ interface Resources {
       "home": {
         "hero_section": {
           "title": "Discover & Explore Museum Masterpieces",
+          "description": "Unveil the beauty of art from the world’s greatest museums. Browse, explore, and immerse yourself in timeless masterpieces—all in one place."
+        },
+        "explore_arts": {
+          "title": "Explore Arts",
           "description": "Unveil the beauty of art from the world’s greatest museums. Browse, explore, and immerse yourself in timeless masterpieces—all in one place."
         }
       }

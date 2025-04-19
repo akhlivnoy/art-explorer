@@ -28,7 +28,7 @@ export const Route = createRootRouteWithContext<RouterContext>()({
 
 function RootComponent() {
   return (
-    <div className="container mx-auto min-h-screen px-4">
+    <div className="container mx-auto flex min-h-screen flex-col px-4">
       <MainHeader />
 
       <Outlet />
