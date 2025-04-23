@@ -2,6 +2,7 @@ import { Link } from '@tanstack/react-router';
 import { t } from 'i18next';
 import { ChevronRight } from 'lucide-react';
 
+import { FavoriteButton } from './FavoriteButton';
 import { Button } from './ui/button';
 import { Large, Muted } from './ui/typography';
 
@@ -18,12 +19,16 @@ export const ArtworkCard: React.FunctionComponent<ArtworkCardProps> = ({ id, tit
       <img alt={title} src={image} />
       <Large>{title}</Large>
       <Muted>{artist}</Muted>
-      <Button asChild className="pl-0" variant="link">
-        <Link params={{ artworkId: id.toString() }} to="/artworks/$artworkId">
-          {t('buttons.read_more')}
-          <ChevronRight />
-        </Link>
-      </Button>
+
+      <div className="mt-2 flex w-full items-center justify-between">
+        <Button asChild className="pl-0" variant="link">
+          <Link params={{ artworkId: id.toString() }} to="/artworks/$artworkId">
+            {t('buttons.read_more')}
+            <ChevronRight />
+          </Link>
+        </Button>
+        <FavoriteButton artworkId={id} />
+      </div>
     </div>
   );
 };

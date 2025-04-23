@@ -7,7 +7,9 @@ interface Resources {
       "register": "Register",
       "logout": "Log Out",
       "read_more": "Read more",
-      "view_all": "View all"
+      "view_all": "View all",
+      "add_to_favorites": "Add to favorites",
+      "remove_from_favorites": "Remove from favorites"
     },
     "labels": {
       "home": "Home",
@@ -33,6 +35,10 @@ interface Resources {
           "description": "Unveil the beauty of art from the world’s greatest museums. Browse, explore, and immerse yourself in timeless masterpieces—all in one place."
         }
       }
+    },
+    "toasts": {
+      "added_to_favorites": "Added to favorites",
+      "removed_from_favorites": "Removed from favorites"
     }
   }
 }

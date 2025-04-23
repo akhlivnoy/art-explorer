@@ -2176,11 +2176,13 @@ __metadata:
     immer: ^10.1.1
     lodash: ^4.17.21
     lucide-react: ^0.481.0
+    next-themes: ^0.4.6
     prettier: ^3.5.3
     prettier-plugin-tailwindcss: ^0.6.11
     react: ^19.0.0
     react-dom: ^19.0.0
     react-i18next: ^15.4.1
+    sonner: ^2.0.3
     tailwind-merge: ^3.0.2
     tailwindcss: ^4.0.13
     tailwindcss-animate: ^1.0.7
@@ -4495,6 +4497,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-themes@npm:^0.4.6":
+  version: 0.4.6
+  resolution: "next-themes@npm:0.4.6"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+  checksum: 295256ee5689629e6578ff4f10f163257172085cac0a250f5f81eae5791fde984a0398be09b959a90c12cf72cf95e82ae11fad6fe13edc4e2d2a6ec2734be0cd
+  languageName: node
+  linkType: hard
+
 "no-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "no-case@npm:3.0.4"
@@ -5438,6 +5450,16 @@ __metadata:
     seroval: ^1.1.0
     seroval-plugins: ^1.1.0
   checksum: 08319db84ff5f879e6a76bd2e77dc9f38ccb5b14e108d1c8f7b6263591c49ba5ca9382418f16b8bf714a54903263b1ac7ee459495a9926f828080be6fb044076
+  languageName: node
+  linkType: hard
+
+"sonner@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "sonner@npm:2.0.3"
+  peerDependencies:
+    react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+    react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+  checksum: cbf2ded951335a68a9e4557ac23b00f641a6cf2e0dc6a9bd5935863e97a1a3395332fb2da5395abceb8c611cb6421ce9b0dc562b60dfcfe93f98a4f3c94bf065
   languageName: node
   linkType: hard
 
