@@ -57,7 +57,11 @@ function RouteComponent() {
           </div>
 
           <Button asChild variant="outline">
-            <Link to="/explore">{t('buttons.view_all')}</Link>
+            <Button asChild variant="outline">
+              <Link search={{ page: 1 }} to="/explore">
+                {t('buttons.view_all')}
+              </Link>
+            </Button>
           </Button>
         </div>
         <ArtworkCarousel />
