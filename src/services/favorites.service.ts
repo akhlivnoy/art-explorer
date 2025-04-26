@@ -4,7 +4,7 @@ import { useFavoritesStore } from '@/store/favorites.store';
  * Merges local favorites with server-side favorites after login.
  * Updates Zustand and syncs to backend.
  */
-export const mergeLocalFavoritesWithServer = async (userId: number) => {
+export const mergeLocalFavoritesWithServer = async (userId: string) => {
   const localFavorites = useFavoritesStore.getState().favorites;
 
   await useFavoritesStore.getState().loadFavoritesFromApi(userId);

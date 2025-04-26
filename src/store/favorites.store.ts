@@ -9,8 +9,8 @@ type FavoriteState = {
   favorites: number[];
   toggleFavorite: (id: number) => void;
   isFavorite: (id: number) => boolean;
-  loadFavoritesFromApi: (userId: number) => Promise<void>;
-  syncFavoritesToApi: (userId: number) => Promise<void>;
+  loadFavoritesFromApi: (userId: string) => Promise<void>;
+  syncFavoritesToApi: (userId: string) => Promise<void>;
   clearFavorites: () => void;
 };
 
@@ -47,7 +47,7 @@ export const useFavoritesStore = create<FavoriteState>()(
       /**
        * Loads the favorites list from backend.
        */
-      loadFavoritesFromApi: async (userId: number) => {
+      loadFavoritesFromApi: async (userId: string) => {
         const response = await FavoritesApi.getFavorites(userId);
         set({ favorites: response.favorites });
       },
@@ -55,7 +55,7 @@ export const useFavoritesStore = create<FavoriteState>()(
       /**
        * Sends the current favorites list to backend.
        */
-      syncFavoritesToApi: async (userId: number) => {
+      syncFavoritesToApi: async (userId: string) => {
         await FavoritesApi.syncFavorites(userId, { favorites: get().favorites });
       },
 

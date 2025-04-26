@@ -1,6 +1,7 @@
 import { Nullable } from '@/types/nullable';
 
 export type User = {
-  id: number;
+  id: string;
+  // id: number;
   username: Nullable<string>;
 };
