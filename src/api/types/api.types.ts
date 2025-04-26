@@ -21,8 +21,18 @@ export type Artwork = {
 
 export class NotFoundError extends Error {}
 
-export class ApiError extends Error {}
+export class ApiError extends Error {
+  constructor(
+    message?: string,
+    public data?: APIErrorItem[],
+  ) {
+    super(message);
+  }
+}
 
 export type ApiErrorResponse = {
-  message: string;
+  data?: APIErrorItem[];
+  message?: string;
 };
+
+export type APIErrorItem = { description?: string };

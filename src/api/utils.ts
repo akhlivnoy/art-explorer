@@ -5,13 +5,17 @@ import { StrictOmit } from '@/types/strictOmit';
 
 import { ApiError, ApiErrorResponse, NotFoundError } from './types/api.types';
 
-export const handleApiResponseErrors = <T>(response: ApiResponse<T, ApiErrorResponse>) => {
+export const handleApiResponseErrors = <T>(response: ApiResponse<T, unknown>) => {
   if (!response.ok) {
+    const message = Array.isArray(response.data)
+      ? response.data.map(item => (item as { description?: string }).description ?? 'Unknown error').join('\n')
+      : ((response.data as { message?: string })?.message ?? response.originalError?.message ?? 'Unknown error');
+
     switch (response.status) {
       case 404:
-        throw new NotFoundError(response.data?.message);
+        throw new NotFoundError(message);
       default:
-        throw new ApiError(response.data?.message ?? response.originalError.message);
+        throw new ApiError(message);
     }
   }
   return response;
