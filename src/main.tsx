@@ -10,6 +10,7 @@ import ReactDOM from 'react-dom/client';
 import { Spinner } from './components/Spinner';
 import { Toaster } from './components/ui/sonner';
 import { DEFAULT_STALE_TIME } from './constants/api';
+import { useSyncFavorites } from './hooks/useSyncFavorites';
 // Import the generated route tree
 import { routeTree } from './routeTree.gen';
 import { useAuthStore } from './store/auth.store';
@@ -51,6 +52,7 @@ declare module '@tanstack/react-router' {
 
 function App() {
   const authStore = useAuthStore();
+  useSyncFavorites();
   // Inject the returned value from the hook into the router context
   return <RouterProvider context={{ auth: authStore, queryClient: queryClient }} router={router} />;
 }
