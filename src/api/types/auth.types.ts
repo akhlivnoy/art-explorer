@@ -1,4 +1,4 @@
-import { User } from '../models/user';
+// import { User } from '../models/user';
 
 // Login
 export type LoginBody = {
@@ -6,14 +6,18 @@ export type LoginBody = {
   password: string;
 };
 export type LoginSuccessResponse = {
-  user: User;
+  id: string;
+  username: string;
+  // user: User;
 };
 
 // Register
 export type RegisterBody = {
+  email: string;
   username: string;
   password: string;
 };
 export type RegisterSuccessResponse = {
-  user: User;
+  id: string;
+  username: string;
 };

@@ -1,8 +1,6 @@
 import { ApiError, NotFoundError } from '@/api/types/api.types';
 
 export function getErrorMessage(error: unknown): string | undefined {
-  console.log('[getErrorMessage] incoming error:', error);
-
   if (error instanceof ApiError || error instanceof NotFoundError) {
     return error.message;
   }

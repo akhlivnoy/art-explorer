@@ -24,13 +24,14 @@ export const LoginModal: React.FunctionComponent = () => {
   };
 
   return (
-    <AuthModal
+    <AuthModal<LoginBody>
       alternateActionButtonText={t('buttons.register')}
       alternateActionText={t('labels.dont_have_account')}
       error={loginMutation.error?.message}
       headerTitle={t('labels.login')}
       isOpen={authAction === 'sign-in'}
       isPending={loginMutation.isPending}
+      mode="login"
       submitButtonTitle={t('buttons.login')}
       onAlternateAction={handleAlternateAction}
       onClose={resetMutation}
