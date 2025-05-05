@@ -11,12 +11,19 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as FavoritesRouteImport } from './routes/favorites/route'
 import { Route as ExploreRouteImport } from './routes/explore/route'
 import { Route as AuthRouteImport } from './routes/_auth/route'
 import { Route as IndexImport } from './routes/index'
 import { Route as ArtworksArtworkIdImport } from './routes/artworks/$artworkId'
 
 // Create/Update Routes
+
+const FavoritesRouteRoute = FavoritesRouteImport.update({
+  id: '/favorites',
+  path: '/favorites',
+  getParentRoute: () => rootRoute,
+} as any)
 
 const ExploreRouteRoute = ExploreRouteImport.update({
   id: '/explore',
@@ -66,6 +73,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRoute
     }
+    '/favorites': {
+      id: '/favorites'
+      path: '/favorites'
+      fullPath: '/favorites'
+      preLoaderRoute: typeof FavoritesRouteImport
+      parentRoute: typeof rootRoute
+    }
     '/artworks/$artworkId': {
       id: '/artworks/$artworkId'
       path: '/artworks/$artworkId'
@@ -82,6 +96,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '': typeof AuthRouteRoute
   '/explore': typeof ExploreRouteRoute
+  '/favorites': typeof FavoritesRouteRoute
   '/artworks/$artworkId': typeof ArtworksArtworkIdRoute
 }
 
@@ -89,6 +104,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof AuthRouteRoute
   '/explore': typeof ExploreRouteRoute
+  '/favorites': typeof FavoritesRouteRoute
   '/artworks/$artworkId': typeof ArtworksArtworkIdRoute
 }
 
@@ -97,15 +113,22 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_auth': typeof AuthRouteRoute
   '/explore': typeof ExploreRouteRoute
+  '/favorites': typeof FavoritesRouteRoute
   '/artworks/$artworkId': typeof ArtworksArtworkIdRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '' | '/explore' | '/artworks/$artworkId'
+  fullPaths: '/' | '' | '/explore' | '/favorites' | '/artworks/$artworkId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '' | '/explore' | '/artworks/$artworkId'
-  id: '__root__' | '/' | '/_auth' | '/explore' | '/artworks/$artworkId'
+  to: '/' | '' | '/explore' | '/favorites' | '/artworks/$artworkId'
+  id:
+    | '__root__'
+    | '/'
+    | '/_auth'
+    | '/explore'
+    | '/favorites'
+    | '/artworks/$artworkId'
   fileRoutesById: FileRoutesById
 }
 
@@ -113,6 +136,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthRouteRoute: typeof AuthRouteRoute
   ExploreRouteRoute: typeof ExploreRouteRoute
+  FavoritesRouteRoute: typeof FavoritesRouteRoute
   ArtworksArtworkIdRoute: typeof ArtworksArtworkIdRoute
 }
 
@@ -120,6 +144,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthRouteRoute: AuthRouteRoute,
   ExploreRouteRoute: ExploreRouteRoute,
+  FavoritesRouteRoute: FavoritesRouteRoute,
   ArtworksArtworkIdRoute: ArtworksArtworkIdRoute,
 }
 
@@ -136,6 +161,7 @@ export const routeTree = rootRoute
         "/",
         "/_auth",
         "/explore",
+        "/favorites",
         "/artworks/$artworkId"
       ]
     },
@@ -147,6 +173,9 @@ export const routeTree = rootRoute
     },
     "/explore": {
       "filePath": "explore/route.tsx"
+    },
+    "/favorites": {
+      "filePath": "favorites/route.tsx"
     },
     "/artworks/$artworkId": {
       "filePath": "artworks/$artworkId.tsx"

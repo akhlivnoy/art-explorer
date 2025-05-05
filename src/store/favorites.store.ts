@@ -25,17 +25,26 @@ export const useFavoritesStore = create<FavoriteState>()(
        */
       toggleFavorite: id => {
         const setFav = new Set(get().favorites);
+        let action: 'add' | 'remove';
+
         if (setFav.has(id)) {
           setFav.delete(id);
+          action = 'remove';
         } else {
           setFav.add(id);
+          action = 'add';
         }
         const updated = Array.from(setFav);
         set({ favorites: updated });
 
         const userId = useAuthStore.getState().user?.id;
         if (userId) {
-          void FavoritesApi.syncFavorites(userId, { favorites: updated });
+          const favoriteDto = { userId, artworkId: id };
+          if (action === 'add') {
+            void FavoritesApi.createFavorites([favoriteDto]);
+          } else {
+            void FavoritesApi.deleteFavorite({ userId, artworkId: id });
+          }
         }
       },
 
@@ -48,15 +57,18 @@ export const useFavoritesStore = create<FavoriteState>()(
        * Loads the favorites list from backend.
        */
       loadFavoritesFromApi: async (userId: string) => {
-        const response = await FavoritesApi.getFavorites(userId);
-        set({ favorites: response.favorites });
+        await FavoritesApi.getFavorites(userId);
       },
 
       /**
        * Sends the current favorites list to backend.
        */
       syncFavoritesToApi: async (userId: string) => {
-        await FavoritesApi.syncFavorites(userId, { favorites: get().favorites });
+        const favorites = get().favorites.map(artworkId => ({
+          userId,
+          artworkId,
+        }));
+        await FavoritesApi.createFavorites(favorites);
       },
 
       /**

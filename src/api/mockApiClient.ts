@@ -3,6 +3,7 @@ import { AxiosError } from 'axios';
 
 import { ApiErrorResponse as DefaultApiErrorResponse, Artwork, PaginationBody } from './types/api.types';
 import { LoginBody, LoginSuccessResponse, RegisterBody, RegisterSuccessResponse } from './types/auth.types';
+import { GetFavoritesResponse } from './types/favorites.types';
 
 const resolveWithDelay = <T>(data: T, delay: number): Promise<T> => {
   return new Promise<T>(resolve => setTimeout(() => resolve(data), delay));
@@ -12,6 +13,28 @@ export const mockApiClient: ApisauceInstance = {
   get: ((url: string, params?: unknown) => {
     // Determine handler by URL
     switch (true) {
+      case /^\/api\/favorites\/Read\/\w+$/.test(url): {
+        const userId = url.split('/').pop() ?? '1'; // отримати "1", "5" тощо
+        const data: GetFavoritesResponse = {
+          favorites: [
+            { userId: userId, artworkId: 1 },
+            { userId: userId, artworkId: 3 },
+          ],
+        };
+        console.log('[MOCK GET] Favorites get for user', userId, ':', data);
+        const response: ApiResponse<GetFavoritesResponse, DefaultApiErrorResponse> = {
+          ok: true,
+          status: 200,
+          data,
+          problem: null,
+          originalError: null,
+          headers: {},
+          config: {},
+          duration: 0,
+        };
+        return resolveWithDelay(response, 300);
+      }
+
       // GET paginated artworks: sequential items based on page & pageSize
       case url === '/api/Artworks': {
         const { page = 1, pageSize = 10 } = (params as PaginationBody) || {};
@@ -88,6 +111,20 @@ export const mockApiClient: ApisauceInstance = {
 
   post: ((url: string, body?: unknown) => {
     switch (url) {
+      case '/api/favorites/Create': {
+        console.log('[MOCK POST] Favorites create:', body);
+        const response: ApiResponse<{ message: string[] }, DefaultApiErrorResponse> = {
+          ok: true,
+          status: 200,
+          data: { message: ['ok'] },
+          problem: null,
+          originalError: null,
+          headers: {},
+          config: {},
+          duration: 0,
+        };
+        return resolveWithDelay(response, 300);
+      }
       case '/api/Account/login':
       case '/api/Account/register': {
         const username = (body as LoginBody | RegisterBody).username;
@@ -150,8 +187,23 @@ export const mockApiClient: ApisauceInstance = {
       }
     }
   }) as ApisauceInstance['put'],
-  delete: ((url: string) => {
+  delete: ((url: string, config?: { data?: unknown }) => {
     switch (url) {
+      case '/api/favorites/Delete': {
+        console.log('[MOCK DELETE] Favorites delete:', config?.data);
+        const response: ApiResponse<{ message: string }, DefaultApiErrorResponse> = {
+          ok: true,
+          status: 200,
+          data: { message: 'deleted' },
+          problem: null,
+          originalError: null,
+          headers: {},
+          config: {},
+          duration: 0,
+        };
+        return resolveWithDelay(response, 300);
+      }
+
       default: {
         const errorResponse: ApiResponse<unknown, DefaultApiErrorResponse> = {
           ok: false,
