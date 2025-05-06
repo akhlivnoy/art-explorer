@@ -14,6 +14,7 @@ interface Resources {
     "labels": {
       "home": "Home",
       "explore_arts": "Explore Arts",
+      "favorites_arts": "Explore Favorites Arts",
       "art_gallery": "Art Gallery",
       "contact_us": "Contact Us",
       "all_rights_reserved": "© 2025 ArtExplorer. All rights reserved.",
@@ -40,6 +41,13 @@ interface Resources {
     "toasts": {
       "added_to_favorites": "Added to favorites",
       "removed_from_favorites": "Removed from favorites"
+    },
+    "errors": {
+      "must_be_logged_in": "You must be logged in to view this page.",
+      "failed_to_load_artworks": "Failed to load artworks. Please try again."
+    },
+    "messages": {
+      "no_artworks": "No artworks to display."
     }
   }
 }

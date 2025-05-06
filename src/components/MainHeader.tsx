@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router';
 import { t } from 'i18next';
 import { UserCircle } from 'lucide-react';
+import { useMemo } from 'react';
 
 import { useLogout } from '@/api/queries/auth.query';
 import LogoIcon from '@/assets/logo.svg?react';
@@ -14,6 +15,7 @@ import { Button } from './ui/button';
 type MainHeaderLink = {
   to: FileRouteTypes['to'];
   labelKey: LocalizationKey;
+  authRequired?: boolean;
 };
 
 const MAIN_HEADER_LINKS: ReadonlyArray<MainHeaderLink> = [
@@ -25,14 +27,22 @@ const MAIN_HEADER_LINKS: ReadonlyArray<MainHeaderLink> = [
     to: '/explore',
     labelKey: 'labels.explore_arts',
   },
+  {
+    to: '/favorites',
+    labelKey: 'labels.favorites_arts',
+  },
 ];
 
 export const MainHeader: React.ComponentType = () => {
   const { user, setAuthAction } = useAuthStore();
   const logoutMutation = useLogout();
 
-  // const showSignInModal = () => setAuthAction('sign-in');
-  const showSignUpModal = () => setAuthAction('sign-up');
+  const showSignUpModal = () => {
+    setAuthAction('sign-up');
+  };
+
+  // filter out routes that require auth
+  const linksToShow = useMemo(() => MAIN_HEADER_LINKS.filter(link => !link.authRequired || !!user), [user]);
 
   return (
     <header className="grid grid-cols-3 items-center gap-2 py-6">
@@ -43,7 +53,7 @@ export const MainHeader: React.ComponentType = () => {
       </div>
 
       <nav className="flex gap-8 justify-self-center">
-        {MAIN_HEADER_LINKS.map(({ to, labelKey }) => (
+        {linksToShow.map(({ to, labelKey }) => (
           <NavLink key={`${to}-${labelKey.toString()}`} to={to}>
             {t(labelKey)}
           </NavLink>
@@ -51,20 +61,15 @@ export const MainHeader: React.ComponentType = () => {
       </nav>
 
       <div className="flex items-center space-x-4 justify-self-end">
-        {!user ? (
+        {user ? (
           <>
-            {/* <Button onClick={showSignInModal}>{t('buttons.login')}</Button> */}
-            <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
-          </>
-        ) : (
-          <>
-            {/* TODO: navigate to favorites page */}
-            <Link to="/" onClick={() => logoutMutation.mutate()}>
+            <Link search={{ page: 1 }} to="/favorites">
               <UserCircle size={36} />
             </Link>
-            <span className="font-medium">{user.username}</span>
             <Button onClick={() => logoutMutation.mutate()}>{t('buttons.logout')}</Button>
           </>
+        ) : (
+          <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
         )}
       </div>
     </header>

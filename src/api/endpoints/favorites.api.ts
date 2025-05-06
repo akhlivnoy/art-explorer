@@ -1,22 +1,40 @@
 import { apiClient } from '../apiClient';
 import { ApiErrorResponse } from '../types/api.types';
-import { GetFavoritesResponse, SyncFavoritesRequest } from '../types/favorites.types';
-import { handleApiResponse, handleApiResponseErrors } from '../utils';
+import { FavoriteDto } from '../types/favorites.types';
+import { handleApiResponse } from '../utils';
 
 export const FavoritesApi = {
   /**
-   * Fetches favorites from the backend for a given user ID
+   * Creates multiple favorites for a user.
    */
-  getFavorites: async (userId: string) => {
-    const response = await apiClient.get<GetFavoritesResponse, ApiErrorResponse>(`users/${userId}/favorites`);
+  createFavorites: async (favorites: FavoriteDto[]): Promise<{ message: string[] }> => {
+    const response = await apiClient.post<{ message: string[] }, ApiErrorResponse>('/api/favorites/Create', favorites);
     return handleApiResponse(response);
   },
 
   /**
-   * Sends the current favorites list to the backend
+   * Gets all favorites for a specific user.
    */
-  syncFavorites: async (userId: string, data: SyncFavoritesRequest) => {
-    const response = await apiClient.put<undefined, ApiErrorResponse>(`users/${userId}/favorites`, data);
-    return handleApiResponseErrors(response).data;
+  getFavorites: async (userId: string): Promise<number[]> => {
+    // const response = await apiClient.get<GetFavoritesResponse, ApiErrorResponse>(`/api/favorites/Read/${userId}`);
+    // const data = handleApiResponseErrors(response)?.data;
+    // return (data?.favorites ?? []).map(fav => fav.artworkId);
+    const response = await apiClient.get<FavoriteDto[], ApiErrorResponse>(`/api/favorites/Read/${userId}`);
+    const favorites = handleApiResponse(response);
+    return (favorites ?? []).map(fav => fav.artworkId);
+  },
+
+  /**
+   * Deletes a specific favorite.
+   */
+  deleteFavorite: async (favorite: FavoriteDto): Promise<{ message: string }> => {
+    const response = await apiClient.delete<{ message: string }, ApiErrorResponse>(
+      '/api/favorites/Delete',
+      {},
+      {
+        data: favorite,
+      },
+    );
+    return handleApiResponse(response);
   },
 };
