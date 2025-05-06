@@ -7,9 +7,17 @@ import { ApiError, ApiErrorResponse, NotFoundError } from './types/api.types';
 
 export const handleApiResponseErrors = <T>(response: ApiResponse<T, unknown>) => {
   if (!response.ok) {
-    const message = Array.isArray(response.data)
-      ? response.data.map(item => (item as { description?: string }).description ?? 'Unknown error').join('\n')
-      : ((response.data as { message?: string })?.message ?? response.originalError?.message ?? 'Unknown error');
+    let message = 'Unknown error';
+
+    if (Array.isArray(response.data)) {
+      message = response.data.map(item => (item as { description?: string }).description ?? 'Unknown error').join('\n');
+    } else if (typeof response.data === 'string') {
+      message = response.data;
+    } else if (typeof response.data === 'object' && response.data !== null) {
+      message = (response.data as { message?: string })?.message ?? message;
+    }
+
+    message = message || response.originalError?.message || 'Unknown error';
 
     switch (response.status) {
       case 404:
@@ -18,6 +26,7 @@ export const handleApiResponseErrors = <T>(response: ApiResponse<T, unknown>) =>
         throw new ApiError(message);
     }
   }
+
   return response;
 };
 
