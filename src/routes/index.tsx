@@ -5,6 +5,7 @@ import homeBannerJpeg from '@/assets/home-banner.jpg';
 import homeBannerWebp from '@/assets/home-banner.webp';
 import { Button } from '@/components/ui/button';
 import { H1, H2, P } from '@/components/ui/typography';
+import { useAuthStore } from '@/store/auth.store';
 
 import { ArtworkCarousel } from './-components/ArtworkCarousel';
 
@@ -13,15 +14,11 @@ export const Route = createFileRoute('/')({
 });
 
 function RouteComponent() {
-  const { auth } = Route.useRouteContext();
+  const user = useAuthStore(state => state.user);
+  const setAuthAction = useAuthStore(state => state.setAuthAction);
 
-  const showSignUpModal = () => {
-    auth.setAuthAction('sign-up');
-  };
-
-  const showLoginModal = () => {
-    auth.setAuthAction('sign-in');
-  };
+  const showSignUpModal = () => setAuthAction('sign-up');
+  const showLoginModal = () => setAuthAction('sign-in');
 
   return (
     <div>
@@ -31,12 +28,16 @@ function RouteComponent() {
           <P>{t('pages.home.hero_section.description')}</P>
 
           <div className="mt-8 flex gap-4">
-            <Button size="lg" onClick={showLoginModal}>
-              {t('buttons.login')}
-            </Button>
-            <Button size="lg" variant="outline" onClick={showSignUpModal}>
-              {t('buttons.sign_up')}
-            </Button>
+            {!user ? (
+              <>
+                <Button size="lg" onClick={showLoginModal}>
+                  {t('buttons.login')}
+                </Button>
+                <Button size="lg" variant="outline" onClick={showSignUpModal}>
+                  {t('buttons.sign_up')}
+                </Button>
+              </>
+            ) : null}
           </div>
         </div>
 
@@ -57,7 +58,11 @@ function RouteComponent() {
           </div>
 
           <Button asChild variant="outline">
-            <Link to="/explore">{t('buttons.view_all')}</Link>
+            <Button asChild variant="outline">
+              <Link search={{ page: 1 }} to="/explore">
+                {t('buttons.view_all')}
+              </Link>
+            </Button>
           </Button>
         </div>
         <ArtworkCarousel />

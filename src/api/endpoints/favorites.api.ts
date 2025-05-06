@@ -7,7 +7,7 @@ export const FavoritesApi = {
   /**
    * Fetches favorites from the backend for a given user ID
    */
-  getFavorites: async (userId: number) => {
+  getFavorites: async (userId: string) => {
     const response = await apiClient.get<GetFavoritesResponse, ApiErrorResponse>(`users/${userId}/favorites`);
     return handleApiResponse(response);
   },
@@ -15,7 +15,7 @@ export const FavoritesApi = {
   /**
    * Sends the current favorites list to the backend
    */
-  syncFavorites: async (userId: number, data: SyncFavoritesRequest) => {
+  syncFavorites: async (userId: string, data: SyncFavoritesRequest) => {
     const response = await apiClient.put<undefined, ApiErrorResponse>(`users/${userId}/favorites`, data);
     return handleApiResponseErrors(response).data;
   },

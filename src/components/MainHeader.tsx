@@ -31,9 +31,8 @@ export const MainHeader: React.ComponentType = () => {
   const { user, setAuthAction } = useAuthStore();
   const logoutMutation = useLogout();
 
-  const showSignUpModal = () => {
-    setAuthAction('sign-up');
-  };
+  // const showSignInModal = () => setAuthAction('sign-in');
+  const showSignUpModal = () => setAuthAction('sign-up');
 
   return (
     <header className="grid grid-cols-3 items-center gap-2 py-6">
@@ -51,14 +50,21 @@ export const MainHeader: React.ComponentType = () => {
         ))}
       </nav>
 
-      <div className="justify-self-end">
-        {user ? (
-          // TODO: navigate to favorites page
-          <Link to="/" onClick={() => logoutMutation.mutate()}>
-            <UserCircle size={36} />
-          </Link>
+      <div className="flex items-center space-x-4 justify-self-end">
+        {!user ? (
+          <>
+            {/* <Button onClick={showSignInModal}>{t('buttons.login')}</Button> */}
+            <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
+          </>
         ) : (
-          <Button onClick={showSignUpModal}>{t('buttons.join')}</Button>
+          <>
+            {/* TODO: navigate to favorites page */}
+            <Link to="/" onClick={() => logoutMutation.mutate()}>
+              <UserCircle size={36} />
+            </Link>
+            <span className="font-medium">{user.username}</span>
+            <Button onClick={() => logoutMutation.mutate()}>{t('buttons.logout')}</Button>
+          </>
         )}
       </div>
     </header>

@@ -1,6 +1,5 @@
 import { useRouter } from '@tanstack/react-router';
 
-import { mergeLocalFavoritesWithServer } from '@/services/favorites.service';
 import { useAuthStore } from '@/store/auth.store';
 import { useFavoritesStore } from '@/store/favorites.store';
 
@@ -14,13 +13,9 @@ export const useLogin = () => {
   return useApiMutation({
     mutationKey: ['login'],
     mutationFn: AuthApi.login,
-    onSuccess: async data => {
+    onSuccess: data => {
       setAuthAction(null);
       setUser(data.user);
-
-      // Merge local and server favorites, then sync
-      await mergeLocalFavoritesWithServer(data.user.id);
-
       setTimeout(router.invalidate);
     },
   });
@@ -33,13 +28,9 @@ export const useRegister = () => {
   return useApiMutation({
     mutationKey: ['register'],
     mutationFn: AuthApi.register,
-    onSuccess: async data => {
+    onSuccess: data => {
       setAuthAction(null);
       setUser(data.user);
-
-      // Merge local and server favorites, then sync
-      await mergeLocalFavoritesWithServer(data.user.id);
-
       setTimeout(router.invalidate);
     },
   });

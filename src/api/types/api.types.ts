@@ -1,18 +1,38 @@
 export type PaginationBody = {
-  limit?: number;
-  skip?: number;
+  page?: number;
+  pageSize?: number;
 };
 
 export type ResponseWithPagination = {
-  skip: number;
+  page: number;
   total: number;
-  limit: number;
+  pageSize: number;
+};
+
+export type Artwork = {
+  objectID: number;
+  title: string;
+  author: string;
+  year: string;
+  style: string;
+  description: string;
+  imageUrl: string;
 };
 
 export class NotFoundError extends Error {}
 
-export class ApiError extends Error {}
+export class ApiError extends Error {
+  constructor(
+    message?: string,
+    public data?: APIErrorItem[],
+  ) {
+    super(message);
+  }
+}
 
 export type ApiErrorResponse = {
-  message: string;
+  data?: APIErrorItem[];
+  message?: string;
 };
+
+export type APIErrorItem = { description?: string };
